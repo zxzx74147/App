@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.zxzx74147.dksq.modules.data.UserData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.zxzx74147.devlib.image.widget.ZXImageView
+            android:id="@+id/portrait"
+            android:layout_width="@dimen/default_gap_80"
+            app:riv_corner_radius="@dimen/default_gap_40"
+            app:img_url="@{user.portrait_small}"
+            android:layout_height="@dimen/default_gap_80" />
+
+        <TextView
+            android:id="@+id/name"
+            android:paddingLeft="@dimen/default_gap_10"
+            android:layout_gravity="center_vertical"
+            android:text="@{user.name}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+</layout>

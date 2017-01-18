@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.zxzx74147.qiushi.common.http.UrlFormat" />
+
+        <variable
+            name="item"
+            type="com.zxzx74147.qiushi.common.data.ItemData" />
+
+        <variable
+            name="handler"
+            type="com.zxzx74147.qiushi.modules.video.widget.VideoView" />
+    </data>
+
+    <merge
+        android:id="@+id/activity_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zxzx74147.qiushi.modules.video.VideoActivity">
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <com.zxzx74147.devlib.image.widget.ZXImageView
+            android:id="@+id/thumb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:img_item_content="@{item}"
+            app:img_url="@{item.pic_url}"
+            android:onClick="@{handler.onVideoClick}"
+            />
+
+
+    </merge>
+</layout>

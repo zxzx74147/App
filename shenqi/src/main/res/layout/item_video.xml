@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.zxzx74147.dksq.modules.data.ItemData" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/default_gap_10"
+        android:paddingRight="@dimen/default_gap_10">
+
+        <include
+            layout="@layout/rect_user"
+            app:user="@{item.user}" />
+
+        <TextView
+            android:id="@+id/content"
+            style="@style/DKTextItemContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.content}" />
+
+
+        <include
+
+            layout="@layout/rect_video"
+            app:item="@{item}" />
+
+        <include
+            layout="@layout/rect_buttom"
+            app:item="@{item}" />
+    </LinearLayout>
+</layout>

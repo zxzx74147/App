@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="http_header">
+    </array>
+    <string name="http_host">http://m2.qiushibaike.com/</string>
+    <string name="http_host_img">http://pic.qiushibaike.com/</string>
+
+    <string name="http_path_portrait">system/avtnew/</string>
+
+    <string name="http_path_img">system/pictures/</string>
+
+    <string name="http_mainpage_list">mainpage/list</string>
+
+</resources>

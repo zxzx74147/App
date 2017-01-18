@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tabs>
+    <tab
+        icon="@drawable/ic_text"
+        id="@+id/action_text"
+        title="@string/text" />
+    <tab
+        icon="@drawable/ic_image"
+        id="@+id/action_image"
+        title="@string/image" />
+    <tab
+        icon="@drawable/ic_video"
+        id="@+id/action_video"
+        title="@string/video" />
+</tabs>

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "852005880847",
+    "firebase_url": "https://dunkeng-c6086.firebaseio.com",
+    "project_id": "dunkeng-c6086",
+    "storage_bucket": "dunkeng-c6086.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852005880847:android:66decfab1bc1a3cb",
+        "android_client_info": {
+          "package_name": "com.zxzx74147.dksq"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852005880847-e5q8bd7piqheqv21ia4qdorfhgtio521.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNx9OHT_IDs4uaqd5bSpya7e3LpJpOnB8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

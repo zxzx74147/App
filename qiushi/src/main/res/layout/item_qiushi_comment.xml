@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <data>
+        <import type="android.view.View"/>
+        <import type="com.zxzx74147.qiushi.common.http.UrlFormat"/>
+        <import type="com.zxzx74147.qiushi.common.data.ItemDataHelper"/>
+        <variable
+            name="item"
+            type="com.zxzx74147.qiushi.common.data.ItemData" />
+
+        <!--<variable-->
+            <!--name="item"-->
+            <!--type="com.zxzx74147.qiushi.common.data.CommentData" />-->
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        style="@style/ItemCardView"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/rect_user_head_name"
+                app:user="@{item.user}"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/ItemContent"
+                android:text="@{item.content}"/>
+
+            <com.zxzx74147.devlib.image.widget.ZXImageView
+                app:img_url="@{UrlFormat.fromatImage(item)}"
+                android:visibility="@{ItemDataHelper.isImage(item)? View.VISIBLE : View.GONE}"
+                app:img_item_content="@{item}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.zxzx74147.qiushi.modules.video.widget.VideoView
+                android:layout_width="match_parent"
+                app:video_item_bind="@{item}"
+                android:visibility="@{ItemDataHelper.isVideo(item)? View.VISIBLE : View.GONE}"
+                android:layout_height="wrap_content"/>
+
+            <include layout="@layout/item_hot_comment"
+                app:comment="@{item.hot_comment}"/>
+
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</layout>

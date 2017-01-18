@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.zxzx74147.qiushi.common.data.ItemData" />
+    </data>
+
+    <RelativeLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zxzx74147.qiushi.modules.video.VideoActivity">
+
+        <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+    </RelativeLayout>
+</layout>
