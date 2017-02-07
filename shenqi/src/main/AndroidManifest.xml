@@ -3,21 +3,42 @@
     package="com.zxzx74147.dksq">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".DKApplication"
         android:allowBackup="true"
         android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name=".DKApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".maintab.MainActivity">
+        <activity android:name=".maintab.MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".launcher.LauncherActivity"></activity>
+        <activity
+            android:name=".modules.launcher.LauncherActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".modules.action.ActionRecordActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".modules.action.ActionDetailActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".modules.launcher.TestActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_test"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

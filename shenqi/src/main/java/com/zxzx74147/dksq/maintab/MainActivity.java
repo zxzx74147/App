@@ -3,6 +3,7 @@ package com.zxzx74147.dksq.maintab;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v4.view.ViewPager;
 
 import com.roughike.bottombar.OnTabReselectListener;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -55,9 +56,26 @@ public class MainActivity extends ZXBaseActivity {
         mBinding.viewpager.addFragment(fragment0);
 
         FeedFragment fragment1 = new FeedFragment();
-        mBinding.viewpager.addFragment(new FeedFragment());
+        mBinding.viewpager.addFragment(fragment1);
 
         FeedFragment fragment3 = new FeedFragment();
-        mBinding.viewpager.addFragment(new FeedFragment());
+        mBinding.viewpager.addFragment(fragment3);
+
+        mBinding.viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBinding.navigation.selectTabAtPosition(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 }

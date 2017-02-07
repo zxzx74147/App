@@ -33,7 +33,6 @@
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="@dimen/default_gap_100"
-            android:layout_alignParentBottom="true"
             android:layout_gravity="start"
             app:bb_tabXmlResource="@xml/bottom_menu_items" />
     </LinearLayout>

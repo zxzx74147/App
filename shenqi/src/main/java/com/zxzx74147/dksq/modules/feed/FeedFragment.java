@@ -15,9 +15,11 @@ import com.zxzx74147.devlib.data.BaseItemData;
 import com.zxzx74147.devlib.http.ZXHttpCallback;
 import com.zxzx74147.devlib.http.ZXHttpRequest;
 import com.zxzx74147.devlib.http.ZXHttpResponse;
+import com.zxzx74147.devlib.utils.ZXToastUtil;
 import com.zxzx74147.devlib.widget.recyclerview.CommonRecyclerViewAdapter;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.FragmentFeedListBinding;
+import com.zxzx74147.dksq.http.Config;
 import com.zxzx74147.dksq.modules.data.ItemListData;
 
 import java.util.ArrayList;
@@ -48,6 +50,7 @@ public class FeedFragment extends ZXBaseFragment {
         mBinding.list.setLayoutManager(new LinearLayoutManager(mBinding.getRoot().getContext()));
         mAdapter = new CommonRecyclerViewAdapter(new FeedRecyclerViewTable(), mData);
         mBinding.list.setAdapter(mAdapter);
+        mBinding.list.openPreload();
         mBinding.refresh.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(MaterialRefreshLayout materialRefreshLayout) {
@@ -70,17 +73,20 @@ public class FeedFragment extends ZXBaseFragment {
             mRequestRefresh = null;
         }
         mRequestRefresh = getRequest(ItemListData.class);
-        mRequestRefresh.setUrl("http://blog.armcv.com/list/50");
+
+        mRequestRefresh.setUrl(Config.HOST+"list/50");
         mRequestRefresh.send(new ZXHttpCallback<ItemListData>() {
             @Override
             public void onResponse(ZXHttpResponse<ItemListData> response) {
                 mBinding.refresh.finishRefresh();
                 mBinding.refresh.finishRefreshLoadMore();
                 if (response.isSuccess()) {
-                    List<BaseItemData> add = FeedDataConverter.convertData(response.mData.list);
+                    List<BaseItemData> add = FeedDataConverter.convertData(getContext(),response.mData.list);
                     mData.clear();
                     mData.addAll(add);
                     mAdapter.notifyDataSetChanged();
+                }else{
+                    ZXToastUtil.showToast(response.mError.errmsg);
                 }
             }
         });
@@ -92,17 +98,19 @@ public class FeedFragment extends ZXBaseFragment {
             mRequestMore = null;
         }
         mRequestMore = getRequest(ItemListData.class);
-        mRequestMore.setUrl("http://blog.armcv.com/list/50");
+        mRequestMore.setUrl(Config.HOST+"list/50");
         mRequestMore.send(new ZXHttpCallback<ItemListData>() {
             @Override
             public void onResponse(ZXHttpResponse<ItemListData> response) {
                 mBinding.refresh.finishRefresh();
                 mBinding.refresh.finishRefreshLoadMore();
                 if (response.isSuccess()) {
-                    List<BaseItemData> add = FeedDataConverter.convertData(response.mData.list);
+                    List<BaseItemData> add = FeedDataConverter.convertData(getContext(),response.mData.list);
 
                     mData.addAll(add);
                     mAdapter.notifyDataSetChanged();
+                }else{
+                    ZXToastUtil.showToast(response.mError.errmsg);
                 }
             }
         });

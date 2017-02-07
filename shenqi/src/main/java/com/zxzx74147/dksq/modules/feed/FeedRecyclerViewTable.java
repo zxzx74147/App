@@ -11,9 +11,6 @@ import com.zxzx74147.dksq.databinding.ItemImageBinding;
 import com.zxzx74147.dksq.databinding.ItemVideoBinding;
 import com.zxzx74147.dksq.modules.data.ItemData;
 
-/**
- * Created by zhengxin on 2017/1/11.
- */
 
 public class FeedRecyclerViewTable implements CommonRecyclerViewTable {
     private int[] mTable = new int[]{

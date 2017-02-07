@@ -11,7 +11,6 @@ import android.content.Context;
 public class ImageModelInterface  {
 
     public static boolean init(Context context){
-        initFresco(context);
         return true;
     }
 

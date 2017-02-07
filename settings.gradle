@@ -1,1 +1,1 @@
-include ':devlib', ':qiushi', ':purewallpapper',  ':common', ':shenqi'
+include ':devlib',  ':purewallpapper',  ':common', ':shenqi'

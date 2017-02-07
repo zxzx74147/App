@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.Fragment;
 
+import com.zxzx74147.devlib.http.ZXHttpConfig;
 import com.zxzx74147.devlib.http.ZXHttpRequest;
 import com.zxzx74147.devlib.utils.ZXUniqueIDGenerator;
 
@@ -22,6 +23,7 @@ public abstract class ZXBaseFragment extends Fragment {
 
     public <T> ZXHttpRequest<T> getRequest(Class mClass) {
         ZXHttpRequest<T> request = new ZXHttpRequest<T>(mClass);
+        request.setMethod(ZXHttpConfig.HTTP_METHOD.HTTP_POST);
         request.setTag(mUniqueID);
         return request;
     }

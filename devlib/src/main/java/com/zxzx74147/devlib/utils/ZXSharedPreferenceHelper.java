@@ -6,7 +6,7 @@ import android.content.SharedPreferences.Editor;
 
 import com.zxzx74147.devlib.ZXApplicationDelegate;
 
-public class SharedPreferenceHelper {
+public class ZXSharedPreferenceHelper {
 
     private static final String SHARED_PREFERENCE = "zx_devlib";
 

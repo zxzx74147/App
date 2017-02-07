@@ -1,6 +1,7 @@
 package com.zxzx74147.devlib.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -8,15 +9,31 @@ import com.zxzx74147.devlib.ZXApplicationDelegate;
 import com.zxzx74147.devlib.image.widget.ZXImageView;
 import com.zxzx74147.devlib.utils.ZXStringUtil;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by zhengxin on 16/1/10.
  */
 public class ZXLoadImageHelper {
 
 
+    public static Bitmap loadImageSync(String path,int width){
+        Context context = ZXApplicationDelegate.getApplication();
+
+        try {
+            Bitmap bm = Glide.with(context).load(path).asBitmap().into(width,width).get();
+            return bm;
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void loadImageView(String url, ImageView imageView) {
 
-        if (ZXStringUtil.checkString(url)) {
+        if (!ZXStringUtil.checkString(url)) {
             return;
         }
         if (imageView == null) {

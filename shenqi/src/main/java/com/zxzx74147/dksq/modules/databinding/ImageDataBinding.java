@@ -17,6 +17,16 @@ import java.util.List;
  */
 
 public class ImageDataBinding {
+
+    public static void loadImageIntoCache(Context context,String url){
+        if (!ZXStringUtil.checkString(url)) {
+            return;
+        }
+        Glide.with(context)
+                .load(url).preload();
+    }
+
+
     @BindingAdapter("content_image")
     public static void setContentImage(ImageView imageView, ItemData item) {
         if (imageView == null||item==null) {
@@ -44,6 +54,7 @@ public class ImageDataBinding {
         if (context == null) {
             context = ZXApplicationDelegate.getApplication();
         }
+        Glide.with(context);
         Glide.with(context)
                 .load(url)
                 .asBitmap()

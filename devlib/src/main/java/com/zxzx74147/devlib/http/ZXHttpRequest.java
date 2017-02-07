@@ -4,6 +4,7 @@ import android.util.SparseArray;
 
 import com.zxzx74147.devlib.utils.ZXJsonUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,6 +30,7 @@ public class ZXHttpRequest<T> {
     private ZXHttpConfig.HTTP_METHOD mMethod = ZXHttpConfig.HTTP_METHOD.HTTP_GET;
 
     private HashMap<String, String> mParams = new HashMap<>(10);
+    private HashMap<String, File> mFile = new HashMap<>(1);
 
     private String mUrl = null;
 
@@ -69,6 +71,11 @@ public class ZXHttpRequest<T> {
 
     public void addParam(String key, String value) {
         mParams.put(key, value);
+    }
+
+    public void addParam(String key, File value) {
+        mMethod = ZXHttpConfig.HTTP_METHOD.HTTP_POST;
+        mFile.put(key, value);
     }
 
     public void addParam(String key, Object value) {
@@ -185,5 +192,9 @@ public class ZXHttpRequest<T> {
 
     public HashMap<String, String> getHeader() {
         return mHeader;
+    }
+
+    public HashMap<String, File> getFile(){
+        return mFile;
     }
 }

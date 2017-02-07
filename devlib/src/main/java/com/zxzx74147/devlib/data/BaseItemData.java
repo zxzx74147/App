@@ -17,4 +17,8 @@ public class BaseItemData<T> implements MultiItemEntity {
     public int getItemType() {
         return mType;
     }
+
+    public void preload(){
+
+    }
 }

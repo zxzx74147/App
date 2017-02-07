@@ -47,3 +47,15 @@ captures/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+.idea/
+common/libs/
+common/src/main/res/drawable/
+purewallpapper/libs/
+purewallpapper/src/main/java/com/zxzx74147/purewallpapper/databinding/
+purewallpapper/src/main/java/com/zxzx74147/purewallpapper/modules/
+purewallpapper/src/main/res/drawable/
+qiushi/libs/
+qiushi/src/main/java/com/zxzx74147/qiushi/common/device/
+qiushi/src/main/java/com/zxzx74147/qiushi/modules/account/
+shenqi/libs/
+zhuxuebao/

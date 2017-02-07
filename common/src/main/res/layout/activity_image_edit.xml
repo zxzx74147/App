@@ -1,0 +1,27 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="handler"
+            type="cn.myhug.common.image.ImageEditActivity" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/activity_image_edit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="cn.myhug.common.image.ImageEditActivity">
+
+        <com.lyft.android.scissors.CropView
+            android:id="@+id/crop_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cropviewViewportRatio="1"
+            />
+
+    </RelativeLayout>
+</layout>
