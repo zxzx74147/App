@@ -6,6 +6,7 @@ import com.zxzx74147.devlib.utils.ZXJsonUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +37,8 @@ public class ZXHttpRequest<T> {
 
     private String mContentType = null;
 
-    private Class<T> tType = null;
+    private Class<T> mClass = null;
+    private Type mType = null;
 
     private Call mCall = null;
 
@@ -57,8 +59,12 @@ public class ZXHttpRequest<T> {
         mTag = tag;
     }
 
-    public ZXHttpRequest(Class<T> type) {
-        tType = type;
+    public ZXHttpRequest(Class<T> mClass) {
+        this.mClass = mClass;
+    }
+
+    public ZXHttpRequest(Type type) {
+        mType = type;
     }
 
     public void setUrl(String url) {
@@ -151,7 +157,12 @@ public class ZXHttpRequest<T> {
                     @Override
                     public ZXHttpResponse<T> call() throws Exception {
                         String rspString = rsp.body().string();
-                        T data = ZXJsonUtil.fromJsonString(rspString, tType);
+                        T data;
+                        if(mClass!=null) {
+                            data = ZXJsonUtil.fromJsonString(rspString, mClass);
+                        }else{
+                            data = ZXJsonUtil.fromJsonString(rspString, mType);
+                        }
                         response.mError.errno = 200;
                         response.mData = data;
                         return response;
@@ -165,7 +176,6 @@ public class ZXHttpRequest<T> {
                         return null;
                     }
                 }, Task.UI_THREAD_EXECUTOR);
-
 
             }
         });

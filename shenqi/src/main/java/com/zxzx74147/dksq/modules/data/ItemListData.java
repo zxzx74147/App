@@ -9,5 +9,4 @@ import java.util.List;
 public class ItemListData {
     public int count;
     public List<ItemData> list;
-
 }

@@ -59,7 +59,7 @@ public class FeedFragment extends ZXBaseFragment {
 
             @Override
             public void onRefreshLoadMore(MaterialRefreshLayout materialRefreshLayout) {
-                loaeMore();
+                loadMore();
             }
         });
         mBinding.refresh.setLoadMore(true);
@@ -92,7 +92,7 @@ public class FeedFragment extends ZXBaseFragment {
         });
     }
 
-    private void loaeMore() {
+    private void loadMore() {
         if (mRequestMore != null) {
             mRequestMore.cancel();
             mRequestMore = null;

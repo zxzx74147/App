@@ -11,6 +11,8 @@ import com.zxzx74147.devlib.utils.CustomToast;
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
 import com.zxzx74147.devlib.utils.ZXUniqueIDGenerator;
 
+import java.lang.reflect.Type;
+
 
 /**
  * Created by zhengxin on 15/8/27.
@@ -74,6 +76,13 @@ public abstract class ZXBaseActivity extends AppCompatActivity {
 
     public <T> ZXHttpRequest<T> getRequest(Class mClass) {
         ZXHttpRequest<T> request = new ZXHttpRequest<T>(mClass);
+        request.setTag(mUniqueID);
+        return request;
+    }
+
+    public <T> ZXHttpRequest<T> getRequest(Type mType) {
+
+        ZXHttpRequest<T> request = new ZXHttpRequest<T>(mType);
         request.setTag(mUniqueID);
         return request;
     }

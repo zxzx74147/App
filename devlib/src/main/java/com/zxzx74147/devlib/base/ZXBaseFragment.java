@@ -21,8 +21,8 @@ public abstract class ZXBaseFragment extends Fragment {
     }
 
 
-    public <T> ZXHttpRequest<T> getRequest(Class mClass) {
-        ZXHttpRequest<T> request = new ZXHttpRequest<T>(mClass);
+    public <T> ZXHttpRequest<T> getRequest(Class<T> mClass) {
+        ZXHttpRequest<T> request = new ZXHttpRequest<>(mClass);
         request.setMethod(ZXHttpConfig.HTTP_METHOD.HTTP_POST);
         request.setTag(mUniqueID);
         return request;
