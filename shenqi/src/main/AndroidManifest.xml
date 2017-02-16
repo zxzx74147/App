@@ -17,13 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".maintab.MainActivity"
+            android:name=".modules.maintab.MainActivity"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".modules.launcher.LauncherActivity"
@@ -32,7 +28,8 @@
         <activity
             android:name=".modules.action.ActionRecordActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".modules.action.ActionDetailActivity"
             android:screenOrientation="portrait"
@@ -45,19 +42,20 @@
         <activity
             android:name=".modules.account.RegisterActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".modules.account.LoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".modules.maintab.MainTabActivity"
+            android:label="@string/title_activity_main_tab"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".modules.account.LoginActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" >
-
         </activity>
     </application>
 

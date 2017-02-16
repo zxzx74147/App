@@ -4,20 +4,22 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
 
-import com.zxzx74147.devlib.base.ZXBaseActivity;
 import com.zxzx74147.devlib.http.ZXHttpCallback;
 import com.zxzx74147.devlib.http.ZXHttpRequest;
 import com.zxzx74147.devlib.http.ZXHttpResponse;
+import com.zxzx74147.devlib.utils.ZXMd5Helper;
 import com.zxzx74147.devlib.utils.ZXStringUtil;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.ActivityRegisterBinding;
 import com.zxzx74147.dksq.http.Config;
 import com.zxzx74147.dksq.modules.data.UserData;
 
+import cn.myhug.common.base.BaseActivity;
+
 /**
  * A login screen that offers login via email/password.
  */
-public class RegisterActivity extends ZXBaseActivity  {
+public class RegisterActivity extends BaseActivity {
 
     private ActivityRegisterBinding mBinding = null;
     private ZXHttpRequest<UserData> mRequest = null;
@@ -32,6 +34,7 @@ public class RegisterActivity extends ZXBaseActivity  {
     public void onRegister(View v){
         String username = mBinding.username.getText().toString();
         String password = mBinding.password.getText().toString();
+        password = ZXMd5Helper.getMD5(password);
         if(!ZXStringUtil.checkString(username)||!ZXStringUtil.checkString(password)){
             showToast("fill params!");
         }

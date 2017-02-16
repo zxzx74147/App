@@ -74,7 +74,7 @@ public abstract class ZXBaseActivity extends AppCompatActivity {
 
     }
 
-    public <T> ZXHttpRequest<T> getRequest(Class mClass) {
+    public <T> ZXHttpRequest<T> getRequest(Class<T> mClass) {
         ZXHttpRequest<T> request = new ZXHttpRequest<T>(mClass);
         request.setTag(mUniqueID);
         return request;

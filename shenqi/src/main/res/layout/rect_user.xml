@@ -19,7 +19,7 @@
             android:id="@+id/portrait"
             android:layout_width="@dimen/default_gap_80"
             app:riv_corner_radius="@dimen/default_gap_40"
-            app:img_url="@{user.portrait_small}"
+            app:img_url="@{user.portrait}"
             android:layout_height="@dimen/default_gap_80" />
 
         <TextView

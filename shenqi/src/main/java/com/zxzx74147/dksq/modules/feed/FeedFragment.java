@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
-import com.zxzx74147.devlib.base.ZXBaseFragment;
 import com.zxzx74147.devlib.data.BaseItemData;
 import com.zxzx74147.devlib.http.ZXHttpCallback;
 import com.zxzx74147.devlib.http.ZXHttpRequest;
@@ -25,13 +24,16 @@ import com.zxzx74147.dksq.modules.data.ItemListData;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FeedFragment extends ZXBaseFragment {
+import cn.myhug.common.base.BaseFragment;
+
+public class FeedFragment extends BaseFragment {
 
     private FragmentFeedListBinding mBinding = null;
     private ZXHttpRequest<ItemListData> mRequestRefresh = null;
     private ZXHttpRequest<ItemListData> mRequestMore = null;
     private CommonRecyclerViewAdapter mAdapter = null;
     private List<BaseItemData> mData = new ArrayList<>();
+    private String page_value = null;
 
     public static FeedFragment newInstance(int columnCount) {
         return null;
@@ -98,7 +100,8 @@ public class FeedFragment extends ZXBaseFragment {
             mRequestMore = null;
         }
         mRequestMore = getRequest(ItemListData.class);
-        mRequestMore.setUrl(Config.HOST+"list/50");
+        mRequestMore.setUrl(Config.HOST+"list/10");
+//        mRequestMore.addParam("next_page",);
         mRequestMore.send(new ZXHttpCallback<ItemListData>() {
             @Override
             public void onResponse(ZXHttpResponse<ItemListData> response) {

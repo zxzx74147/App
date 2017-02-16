@@ -14,6 +14,6 @@ public class ZXToastUtil {
     }
 
     public static void showToast(String toast){
-        Toast.makeText(ZXApplicationDelegate.getApplication(),toast,Toast.LENGTH_LONG);
+        Toast.makeText(ZXApplicationDelegate.getApplication(),toast,Toast.LENGTH_LONG).show();
     }
 }

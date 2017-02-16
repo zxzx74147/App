@@ -1,9 +1,11 @@
 package com.zxzx74147.devlib.image.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.zxzx74147.devlib.R;
 
 /**
  * Created by zhengxin on 15/8/27.
@@ -19,12 +21,20 @@ public class ZXImageView extends RoundedImageView {
 
     public ZXImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     public ZXImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        init(attrs);
     }
 
+    private void init(AttributeSet attrs){
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.ZXImageView);
+        float radio = a.getFloat(R.styleable.ZXImageView_image_radio, 0);
+        setRatio(radio);
+        a.recycle();
+    }
     public void setImageUrl(String url) {
         mUrl = url;
     }

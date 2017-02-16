@@ -57,6 +57,7 @@ public class ZXHttpClient {
 
         Set<Map.Entry<String, String>> set = request.getParams().entrySet();
         Set<Map.Entry<String, File>> files = request.getFile().entrySet();
+        builder.get();
         switch (request.getMethod()) {
             case HTTP_GET:
                 StringBuffer sb = new StringBuffer(set.size() * 10);
@@ -69,9 +70,11 @@ public class ZXHttpClient {
                     sb.append(entry.getValue());
                 }
                 url = url + "?" + sb.toString();
+
                 break;
             case HTTP_POST:
                 MultipartBody.Builder requestBodyBuilder = new MultipartBody.Builder();
+                requestBodyBuilder.setType(MultipartBody.FORM);
                 boolean hasBody = false;
                 for (HashMap.Entry<String, String> entry : set) {
                     requestBodyBuilder.addFormDataPart(entry.getKey(), entry.getValue());
@@ -93,7 +96,6 @@ public class ZXHttpClient {
         }
         ZXLog.i(TAG, "url=" + url);
         builder.url(url);
-        builder.get();
         Request okHttpRequest = builder.build();
         Call call = mClient.newCall(okHttpRequest);
         return call;

@@ -6,6 +6,4 @@ package com.zxzx74147.devlib.http;
 
 public interface  ZXHttpHook {
      void onSendRequest(ZXHttpRequest request);
-
-
 }

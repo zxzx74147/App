@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -8,20 +9,74 @@
             name="handler"
             type="com.zxzx74147.dksq.modules.action.ActionRecordActivity" />
 
+        <variable
+            name="data"
+            type="com.zxzx74147.dksq.modules.data.ActionData" />
+
     </data>
 
     <RelativeLayout
-        android:id="@+id/activity_record_action"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".modules.action.ActionRecordActivity">
+        android:layout_height="match_parent">
 
-        <com.zxzx74147.dksq.modules.wiget.RingWidget
-            android:id="@+id/ring"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/default_gap_100"
-            android:layout_marginRight="@dimen/default_gap_100" />
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:id="@+id/activity_record_action"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:context=".modules.action.ActionRecordActivity">
+
+                <com.zxzx74147.dksq.modules.wiget.RingWidget
+                    android:id="@+id/ring"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/default_gap_200"
+                    android:layout_marginRight="@dimen/default_gap_200" />
+
+                <EditText
+                    android:id="@+id/comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minLines="5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_gap_30">
+
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{handler::onImageClick}"
+                        app:image_radio="1"
+                        app:img_url="@{data.image}" />
+
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:image_radio="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/commit"
+                        android:onClick="@{handler::onSubmitClick}"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/default_gap_80" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </RelativeLayout>
 </layout>

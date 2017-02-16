@@ -40,4 +40,8 @@
         <attr name="inner_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="ZXImageView">
+        <attr name="image_radio" format="float" />
+    </declare-styleable>
+
 </resources>

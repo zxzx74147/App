@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.zxzx74147.dksq.maintab.MainActivity">
+        tools:context=".modules.maintab.MainActivity">
 
 
         <cn.myhug.common.FragmentViewPager

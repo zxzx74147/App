@@ -11,7 +11,7 @@ import com.zxzx74147.devlib.utils.BdLog;
 import com.zxzx74147.devlib.utils.ZXSharedPreferenceHelper;
 import com.zxzx74147.devlib.utils.ZXStringUtil;
 
-import cn.myhug.common.key.SPKeys;
+import cn.myhug.common.key.AllKeys;
 
 import static android.content.Context.TELEPHONY_SERVICE;
 
@@ -24,29 +24,28 @@ public class DeviceIdHelper {
     private static String ID = null;
 
     static {
-        ID = ZXSharedPreferenceHelper.getString(SPKeys.KEY_DEVIDE_ID, null);
+        ID = ZXSharedPreferenceHelper.getString(AllKeys.KEY_DEVIDE_ID, null);
+        if (!ZXStringUtil.checkString(ID)) {
+            TelephonyManager tm = ((TelephonyManager) ZXApplicationDelegate.getApplication().getSystemService(TELEPHONY_SERVICE));
+            String imei = tm.getDeviceId();
+
+            WifiManager wifiMng = (WifiManager) ZXApplicationDelegate.getApplication().getSystemService(Context.WIFI_SERVICE);
+            WifiInfo wifiInfor = wifiMng.getConnectionInfo();
+            String mac = wifiInfor.getMacAddress();
+
+            String ANDROID_ID = Settings.System.getString(ZXApplicationDelegate.getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
+
+            StringBuilder sb = new StringBuilder(64);
+            sb.append(imei);
+            sb.append(mac);
+            sb.append(ANDROID_ID);
+            ID = sb.toString();
+            ZXSharedPreferenceHelper.saveString(AllKeys.KEY_DEVIDE_ID, ID);
+            BdLog.i(TAG, "getDeviceId", "device id=" + ID);
+        }
     }
 
-    public static final String getDeviceId() {
-        if (ZXStringUtil.checkString(ID)) {
-            return ID;
-        }
-        TelephonyManager tm = ((TelephonyManager) ZXApplicationDelegate.getApplication().getSystemService(TELEPHONY_SERVICE));
-        String imei = tm.getDeviceId();
-
-        WifiManager wifiMng = (WifiManager) ZXApplicationDelegate.getApplication().getSystemService(Context.WIFI_SERVICE);
-        WifiInfo wifiInfor = wifiMng.getConnectionInfo();
-        String mac = wifiInfor.getMacAddress();
-
-        String ANDROID_ID = Settings.System.getString(ZXApplicationDelegate.getApplication().getContentResolver(), Settings.Secure.ANDROID_ID);
-
-        StringBuilder sb = new StringBuilder(64);
-        sb.append(imei);
-        sb.append(mac);
-        sb.append(ANDROID_ID);
-        ID = sb.toString();
-        ZXSharedPreferenceHelper.saveString(SPKeys.KEY_DEVIDE_ID, ID);
-        BdLog.i(TAG, "getDeviceId", "device id=" + ID);
+    public static String getDeviceId() {
         return ID;
     }
 }

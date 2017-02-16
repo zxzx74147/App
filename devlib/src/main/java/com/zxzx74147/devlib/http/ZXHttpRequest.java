@@ -27,7 +27,6 @@ import static com.zxzx74147.devlib.http.ZXHttpConfig.HTTP_ERROR;
 public class ZXHttpRequest<T> {
     private static SparseArray<List<ZXHttpRequest>> mRequests = new SparseArray<>();
 
-
     private ZXHttpConfig.HTTP_METHOD mMethod = ZXHttpConfig.HTTP_METHOD.HTTP_GET;
 
     private HashMap<String, String> mParams = new HashMap<>(10);
@@ -107,7 +106,6 @@ public class ZXHttpRequest<T> {
     public void send(ZXHttpCallback<T> callback) {
         mCallback = callback;
         mCall = ZXHttpClient.sendRequestAsync(this);
-        final ZXHttpResponse<T> response = new ZXHttpResponse<T>();
         if (mTag != 0) {
             List<ZXHttpRequest> list = mRequests.get(mTag);
             if (list == null) {
@@ -126,7 +124,7 @@ public class ZXHttpRequest<T> {
                 if (call.isCanceled()) {
                     return;
                 }
-                final ZXHttpResponse<T> response = new ZXHttpResponse<T>();
+                final ZXHttpResponse<T> response = new ZXHttpResponse<>();
                 response.setRequest(ZXHttpRequest.this);
                 response.mError.errno = HTTP_ERROR;
                 response.mError.errmsg = e.getMessage();
@@ -150,21 +148,14 @@ public class ZXHttpRequest<T> {
                 if (call.isCanceled() || mCallback == null) {
                     return;
                 }
-                final ZXHttpResponse<T> response = new ZXHttpResponse<T>();
+                final ZXHttpResponse<T> response = new ZXHttpResponse<>();
                 response.setRequest(ZXHttpRequest.this);
 
                 Task.callInBackground(new Callable<ZXHttpResponse<T>>() {
                     @Override
                     public ZXHttpResponse<T> call() throws Exception {
                         String rspString = rsp.body().string();
-                        T data;
-                        if(mClass!=null) {
-                            data = ZXJsonUtil.fromJsonString(rspString, mClass);
-                        }else{
-                            data = ZXJsonUtil.fromJsonString(rspString, mType);
-                        }
-                        response.mError.errno = 200;
-                        response.mData = data;
+                        dealResponse(rspString, response);
                         return response;
                     }
                 }).continueWith(new Continuation<ZXHttpResponse<T>, Object>() {
@@ -188,6 +179,18 @@ public class ZXHttpRequest<T> {
         mCallback = null;
     }
 
+    protected boolean dealResponse(String rspString, ZXHttpResponse<T> response) {
+        T data = null;
+        if (mClass != null) {
+            data = ZXJsonUtil.fromJsonString(rspString, mClass);
+        } else if (mType != null) {
+            data = ZXJsonUtil.fromJsonString(rspString, mType);
+        }
+        response.mError.errno = 200;
+        response.mData = data;
+        return true;
+    }
+
     public static void cancelWithTag(int tag) {
         List<ZXHttpRequest> list = mRequests.get(tag);
         if (list == null) {
@@ -200,11 +203,11 @@ public class ZXHttpRequest<T> {
         mRequests.remove(tag);
     }
 
-    public HashMap<String, String> getHeader() {
+    HashMap<String, String> getHeader() {
         return mHeader;
     }
 
-    public HashMap<String, File> getFile(){
+    HashMap<String, File> getFile() {
         return mFile;
     }
 }
