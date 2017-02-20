@@ -27,6 +27,7 @@ public class ZXHttpClient {
     private static OkHttpClient mClient = null;
     private static ZXHttpHook mHook = null;
 
+
     public static void setHook(ZXHttpHook hook) {
         mHook = hook;
     }
@@ -77,7 +78,7 @@ public class ZXHttpClient {
                 requestBodyBuilder.setType(MultipartBody.FORM);
                 boolean hasBody = false;
                 for (HashMap.Entry<String, String> entry : set) {
-                    requestBodyBuilder.addFormDataPart(entry.getKey(), entry.getValue());
+                    requestBodyBuilder.addFormDataPart(entry.getKey(), entry.getValue()==null? "":entry.getValue());
                     hasBody= true;
                 }
                 for (HashMap.Entry<String, File> entry : files) {
