@@ -3,6 +3,7 @@ package cn.myhug.common.utils;
 import android.app.Activity;
 import android.util.LruCache;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.myhug.common.callback.IFileSelectCallback;
@@ -26,16 +27,19 @@ public class ImageSelectHelper {
                 .showCamera(true) // show camera or not. true by default
                 .single() // single mode
                 .start(activity, id);
+
     }
 
-    public static void selectImageMulti(Activity activity,IFileSelectCallback callback){
+    public static void selectImageMulti(Activity activity, ArrayList<String> origin, IFileSelectCallback callback){
         mRequestOffset++;
         mRequestOffset%=RequestCode.REQUEST_FRAGMENT;
         int id = RequestCode.REQUEST_SELECT_IMAGE+mRequestOffset;
         mTables.put(id,callback);
         MultiImageSelector.create()
-                .showCamera(true) // show camera or not. true by default
-                .multi() // single mode
+                .showCamera(true)
+                .count(9)
+                .origin(origin)
+                .multi()
                 .start(activity, id);
     }
 

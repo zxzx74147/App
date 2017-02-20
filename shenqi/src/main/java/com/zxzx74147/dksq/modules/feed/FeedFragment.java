@@ -19,7 +19,7 @@ import com.zxzx74147.devlib.widget.recyclerview.CommonRecyclerViewAdapter;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.FragmentFeedListBinding;
 import com.zxzx74147.dksq.http.Config;
-import com.zxzx74147.dksq.modules.data.ItemListData;
+import com.zxzx74147.dksq.modules.model.ItemListModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +29,8 @@ import cn.myhug.common.base.BaseFragment;
 public class FeedFragment extends BaseFragment {
 
     private FragmentFeedListBinding mBinding = null;
-    private ZXHttpRequest<ItemListData> mRequestRefresh = null;
-    private ZXHttpRequest<ItemListData> mRequestMore = null;
+    private ZXHttpRequest<ItemListModel> mRequestRefresh = null;
+    private ZXHttpRequest<ItemListModel> mRequestMore = null;
     private CommonRecyclerViewAdapter mAdapter = null;
     private List<BaseItemData> mData = new ArrayList<>();
     private String page_value = null;
@@ -65,7 +65,7 @@ public class FeedFragment extends BaseFragment {
             }
         });
         mBinding.refresh.setLoadMore(true);
-        refresh();
+//        refresh();
         return mBinding.getRoot();
     }
 
@@ -74,12 +74,12 @@ public class FeedFragment extends BaseFragment {
             mRequestRefresh.cancel();
             mRequestRefresh = null;
         }
-        mRequestRefresh = getRequest(ItemListData.class);
+        mRequestRefresh = getRequest(ItemListModel.class);
 
         mRequestRefresh.setUrl(Config.HOST+"list/50");
-        mRequestRefresh.send(new ZXHttpCallback<ItemListData>() {
+        mRequestRefresh.send(new ZXHttpCallback<ItemListModel>() {
             @Override
-            public void onResponse(ZXHttpResponse<ItemListData> response) {
+            public void onResponse(ZXHttpResponse<ItemListModel> response) {
                 mBinding.refresh.finishRefresh();
                 mBinding.refresh.finishRefreshLoadMore();
                 if (response.isSuccess()) {
@@ -99,12 +99,12 @@ public class FeedFragment extends BaseFragment {
             mRequestMore.cancel();
             mRequestMore = null;
         }
-        mRequestMore = getRequest(ItemListData.class);
+        mRequestMore = getRequest(ItemListModel.class);
         mRequestMore.setUrl(Config.HOST+"list/10");
 //        mRequestMore.addParam("next_page",);
-        mRequestMore.send(new ZXHttpCallback<ItemListData>() {
+        mRequestMore.send(new ZXHttpCallback<ItemListModel>() {
             @Override
-            public void onResponse(ZXHttpResponse<ItemListData> response) {
+            public void onResponse(ZXHttpResponse<ItemListModel> response) {
                 mBinding.refresh.finishRefresh();
                 mBinding.refresh.finishRefreshLoadMore();
                 if (response.isSuccess()) {

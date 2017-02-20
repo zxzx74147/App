@@ -1,4 +1,4 @@
-package com.zxzx74147.dksq.modules.data;
+package com.zxzx74147.dksq.modules.model;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by zhengxin on 2017/1/10.
  */
 
-public class ItemData {
+public class ItemModel {
 
 
     public int id;
@@ -30,7 +30,7 @@ public class ItemData {
     public int commont_count;
     public String commont_hot;
     public String type;
-    public UserData user;
+    public UserModel user;
 
     public static class ImageSizeData {
         public List<Integer> s;

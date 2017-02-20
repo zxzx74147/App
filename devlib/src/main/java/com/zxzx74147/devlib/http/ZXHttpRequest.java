@@ -103,9 +103,29 @@ public class ZXHttpRequest<T> {
         return mParams;
     }
 
+    public ZXHttpResponse<T> sendSync(){
+        mCall = ZXHttpClient.sendRequest(this);
+        final ZXHttpResponse<T> response = new ZXHttpResponse<>();
+        response.setRequest(ZXHttpRequest.this);
+
+        try {
+            Response rsp = mCall.execute();
+            String rspString = rsp.body().string();
+            dealResponse(rspString, response);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            response.mError.errno = HTTP_ERROR;
+            response.mError.errmsg = e.getMessage();
+
+        }
+        return response;
+    }
+
     public void send(ZXHttpCallback<T> callback) {
         mCallback = callback;
-        mCall = ZXHttpClient.sendRequestAsync(this);
+        mCall = ZXHttpClient.sendRequest(this);
+
         if (mTag != 0) {
             List<ZXHttpRequest> list = mRequests.get(mTag);
             if (list == null) {

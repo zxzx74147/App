@@ -10,7 +10,10 @@ import java.util.Locale;
  */
 public class TimerUtil {
     public static final String YMD = "yyyy-MM-dd";
-    public static final long DAY = 1000 * 60 * 60 * 24;
+    public static final long SECOND = 1000  ;
+    public static final long MINITE = SECOND * 60  ;
+    public static final long HOUR = MINITE * 60 ;
+    public static final long DAY = HOUR * 24;
 
     public static int getCurrentYear() {
         final Calendar mCalendar = Calendar.getInstance();

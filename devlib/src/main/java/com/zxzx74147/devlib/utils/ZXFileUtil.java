@@ -14,8 +14,8 @@ public class ZXFileUtil {
     private static String SD_PATH;
     private static String INNER_PATH;
     private static String DIVIDER;
-    public static final File EXTERNAL_STORAGE_DIRECTORY = Environment.getExternalStorageDirectory();
-    private static String APP_DIR = "xrb";
+    public static final File EXTERNAL_STORAGE_DIRECTORY = ZXApplicationDelegate.getApplication().getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+    private static String APP_DIR = "zx";
 
     static {
         HAS_SDCARD = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
@@ -148,6 +148,21 @@ public class ZXFileUtil {
             BdLog.e("FileHelper", "CreateFile", "error = " + ex.getMessage());
             return null;
         }
+    }
+
+    public static File getImageCacheFile(String filename) {
+        String dst = EXTERNAL_STORAGE_DIRECTORY + File.separator + "cache" + File.separator + filename;
+        File file = new File(dst);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+        return file;
+    }
+
+    public static void deleteImageCacheFile(String filename) {
+        String dst = EXTERNAL_STORAGE_DIRECTORY + File.separator + "cache" + File.separator + filename;
+        File file = new File(dst);
+        deleteFile(file);
     }
 
     public static File createFileIfNotFound(String file) {

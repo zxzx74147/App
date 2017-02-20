@@ -12,7 +12,7 @@ import com.zxzx74147.devlib.utils.ZXStringUtil;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.ActivityLoginBinding;
 import com.zxzx74147.dksq.http.Config;
-import com.zxzx74147.dksq.modules.data.UserData;
+import com.zxzx74147.dksq.modules.model.UserModel;
 
 import cn.myhug.common.base.BaseActivity;
 
@@ -22,7 +22,7 @@ import cn.myhug.common.base.BaseActivity;
 public class LoginActivity extends BaseActivity {
 
     private ActivityLoginBinding mBinding = null;
-    private ZXHttpRequest<UserData> mRequest = null;
+    private ZXHttpRequest<UserModel> mRequest = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,13 +37,13 @@ public class LoginActivity extends BaseActivity {
         if(!ZXStringUtil.checkString(username)||!ZXStringUtil.checkString(password)){
             showToast("fill params!");
         }
-        mRequest = getRequest(UserData.class);
+        mRequest = getRequest(UserModel.class);
         mRequest.setUrl(Config.HOST+AccountHttpConfig.ADDRESS_LOGIN);
         mRequest.addParam("name",username);
         mRequest.addParam("password",password);
-        mRequest.send(new ZXHttpCallback<UserData>() {
+        mRequest.send(new ZXHttpCallback<UserModel>() {
             @Override
-            public void onResponse(ZXHttpResponse<UserData> response) {
+            public void onResponse(ZXHttpResponse<UserModel> response) {
 
                 if(response.isSuccess()){
                     AccountManager.sharedInstance().saveUser(response.mData);

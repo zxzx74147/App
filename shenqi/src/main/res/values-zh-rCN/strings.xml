@@ -7,6 +7,6 @@
     <string name="prompt_password">密码</string>
     <string name="prompt_email">邮箱地址</string>
     <string name="title_activity_login">登录</string>
-    <string name="app_name">蹲坑神器</string>
+    <string name="app_name">Test</string>
     <string name="action_sign_in">注册</string>
 </resources>

@@ -6,7 +6,7 @@ import com.zxzx74147.devlib.utils.BdLog;
 import com.zxzx74147.devlib.utils.ZXJsonUtil;
 import com.zxzx74147.devlib.utils.ZXSharedPreferenceHelper;
 import com.zxzx74147.devlib.utils.ZXStringUtil;
-import com.zxzx74147.dksq.modules.data.UserData;
+import com.zxzx74147.dksq.modules.model.UserModel;
 
 import cn.myhug.common.key.AllKeys;
 
@@ -17,7 +17,7 @@ import cn.myhug.common.key.AllKeys;
 public class AccountManager {
     private static final String TAG = AccountManager.class.getName();
     private static final boolean VERBOSE = true;
-    private UserData mUserData = null;
+    private UserModel mUserModel = null;
     private String mToken = null;
     private String mUid = null;
 
@@ -26,11 +26,11 @@ public class AccountManager {
     private AccountManager() {
         mToken = ZXSharedPreferenceHelper.getString(AllKeys.KEY_TOKEN, null);
         mUid = ZXSharedPreferenceHelper.getString(AllKeys.KEY_UID, null);
-        ZXKVStore.getAsync(AllKeys.KEY_USER_DATA, null, UserData.class, new ICommonCallback<UserData>() {
+        ZXKVStore.getAsync(AllKeys.KEY_USER_DATA, null, UserModel.class, new ICommonCallback<UserModel>() {
             @Override
-            public int callback(UserData arg) {
-                mUserData = arg;
-                if(VERBOSE)BdLog.i(TAG, "user_data get", ZXJsonUtil.toJsonString(mUserData));
+            public int callback(UserModel arg) {
+                mUserModel = arg;
+                if(VERBOSE)BdLog.i(TAG, "user_data get", ZXJsonUtil.toJsonString(mUserModel));
                 return 0;
             }
         });
@@ -43,8 +43,8 @@ public class AccountManager {
         return mInstance;
     }
 
-    public UserData getUserData() {
-        return mUserData;
+    public UserModel getUserData() {
+        return mUserModel;
     }
 
     public String getToken() {
@@ -67,13 +67,13 @@ public class AccountManager {
         ZXKVStore.setAsync(AllKeys.KEY_USER_DATA,null);
     }
 
-    public void saveUser(UserData mData) {
-        mUserData = mData;
-        mToken = mUserData.token;
-        mUid = mUserData.id;
+    public void saveUser(UserModel mData) {
+        mUserModel = mData;
+        mToken = mUserModel.token;
+        mUid = mUserModel.id;
         ZXSharedPreferenceHelper.saveString(AllKeys.KEY_UID, mUid);
         ZXSharedPreferenceHelper.saveString(AllKeys.KEY_TOKEN, mToken);
-        ZXKVStore.setAsync(AllKeys.KEY_USER_DATA, mUserData);
-        if(VERBOSE)BdLog.i(TAG, "user_data set", ZXJsonUtil.toJsonString(mUserData));
+        ZXKVStore.setAsync(AllKeys.KEY_USER_DATA, mUserModel);
+        if(VERBOSE)BdLog.i(TAG, "user_data set", ZXJsonUtil.toJsonString(mUserModel));
     }
 }

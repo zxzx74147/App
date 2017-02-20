@@ -1,4 +1,4 @@
-package com.zxzx74147.dksq.modules.data;
+package com.zxzx74147.dksq.modules.model;
 
 import java.util.List;
 
@@ -6,9 +6,9 @@ import java.util.List;
  * Created by zhengxin on 2017/1/11.
  */
 
-public class ItemListData {
+public class ItemListModel {
     public int count;
     public String next_page;
     public int has_more;
-    public List<ItemData> list;
+    public List<ItemModel> list;
 }

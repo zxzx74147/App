@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide;
 import com.zxzx74147.devlib.ZXApplicationDelegate;
 import com.zxzx74147.devlib.image.widget.ZXImageView;
 import com.zxzx74147.devlib.utils.ZXStringUtil;
-import com.zxzx74147.dksq.modules.data.ItemData;
+import com.zxzx74147.dksq.modules.model.ItemModel;
 
 import java.util.List;
 
@@ -28,13 +28,13 @@ public class ImageDataBinding {
 
 
     @BindingAdapter("content_image")
-    public static void setContentImage(ImageView imageView, ItemData item) {
+    public static void setContentImage(ImageView imageView, ItemModel item) {
         if (imageView == null||item==null) {
             return;
         }
 
         String url = item.image_high;
-        ItemData.ImageSizeData size =  item.image_size;
+        ItemModel.ImageSizeData size =  item.image_size;
         if (imageView instanceof ZXImageView) {
             if (url != null && url.equals(((ZXImageView) imageView).getImageUrl())) {
                 return;

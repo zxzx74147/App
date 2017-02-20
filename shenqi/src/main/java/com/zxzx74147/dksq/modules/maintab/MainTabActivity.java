@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.zxzx74147.devlib.utils.ZXActivityJumpHelper;
+import com.zxzx74147.devlib.utils.ZXMonitorUtil;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.ActivityMainTabBinding;
 import com.zxzx74147.dksq.modules.account.LoginActivity;
@@ -44,7 +45,15 @@ public class MainTabActivity extends BaseActivity{
 
         mBinding.setNavigationPresent(new NavigationPresent());
 
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ZXMonitorUtil.getTopPackage();
+            }
+        },2000);
+
     }
+
 
     public class NavigationPresent implements NavigationView.OnNavigationItemSelectedListener{
 

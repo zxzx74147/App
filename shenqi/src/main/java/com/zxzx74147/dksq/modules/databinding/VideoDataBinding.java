@@ -5,7 +5,7 @@ import android.databinding.BindingAdapter;
 
 import com.bumptech.glide.Glide;
 import com.zxzx74147.devlib.ZXApplicationDelegate;
-import com.zxzx74147.dksq.modules.data.ItemData;
+import com.zxzx74147.dksq.modules.model.ItemModel;
 
 import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
@@ -15,12 +15,12 @@ import fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard;
 
 public class VideoDataBinding {
     @BindingAdapter("content_video")
-    public static void setContentImage(JCVideoPlayerStandard videoView, ItemData item) {
+    public static void setContentImage(JCVideoPlayerStandard videoView, ItemModel item) {
         if (videoView == null||item==null) {
             return;
         }
         String url = item.video_pic;
-        ItemData.ImageSizeData size =  item.image_size;
+        ItemModel.ImageSizeData size =  item.image_size;
         videoView.setUp(item.video, JCVideoPlayerStandard.SCREEN_LAYOUT_LIST);
         videoView.widthRatio = size.m.get(0);
         videoView.heightRatio = size.m.get(1);

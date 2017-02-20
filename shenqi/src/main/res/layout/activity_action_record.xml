@@ -5,37 +5,50 @@
 
     <data>
 
-        <variable
-            name="handler"
-            type="com.zxzx74147.dksq.modules.action.ActionRecordActivity" />
 
         <variable
-            name="data"
-            type="com.zxzx74147.dksq.modules.data.ActionData" />
+            name="vm"
+            type="com.zxzx74147.dksq.modules.action.viewmodel.ActionViewModel" />
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="0dip"
+            android:layout_weight="1">
 
             <LinearLayout
                 android:id="@+id/activity_record_action"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:context=".modules.action.ActionRecordActivity">
 
-                <com.zxzx74147.dksq.modules.wiget.RingWidget
-                    android:id="@+id/ring"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/default_gap_200"
-                    android:layout_marginRight="@dimen/default_gap_200" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action" />
+
+                    <android.support.v4.widget.Space
+                        android:layout_width="0dip"
+                        android:layout_height="1dp"
+                        android:layout_weight="1" />
+
+                    <cn.myhug.common.widget.ColorPicker
+                        android:id="@+id/color"
+                        android:layout_width="@dimen/default_gap_100"
+                        android:layout_height="@dimen/default_gap_75" />
+                </LinearLayout>
 
                 <EditText
                     android:id="@+id/comment"
@@ -49,34 +62,77 @@
                     android:padding="@dimen/default_gap_30">
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:image_radio="1"
+                        app:img_url="@{vm.getImage(0)}"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:onClick="@{handler::onImageClick}"
                         app:image_radio="1"
-                        app:img_url="@{data.image}" />
+                        app:img_url="@{vm.getImage(1)}"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:image_radio="1" />
+                        app:img_url="@{vm.getImage(2)}"
+                        app:image_radio="1"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/default_gap_30">
 
-                    <Button
-                        android:id="@+id/commit"
-                        android:onClick="@{handler::onSubmitClick}"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/default_gap_80" />
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:image_radio="1"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:image_radio="1"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+
+                    <com.zxzx74147.devlib.image.widget.ZXImageView
+                        android:id="@+id/image5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        app:image_radio="1"
+                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
                 </LinearLayout>
+
 
             </LinearLayout>
         </ScrollView>
-    </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/commit"
+                android:onClick="@{()->vm.submitAction()}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/default_gap_80"
+                android:text="@string/submit" />
+        </LinearLayout>
+    </LinearLayout>
 </layout>

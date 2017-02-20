@@ -38,7 +38,7 @@ public class ZXHttpClient {
         mClient = builder.build();
     }
 
-    public static Call sendRequestAsync(ZXHttpRequest request) {
+    public static Call sendRequest(ZXHttpRequest request) {
         if (mHook != null) {
             mHook.onSendRequest(request);
         }

@@ -1,4 +1,4 @@
-package com.zxzx74147.dksq.modules.data;
+package com.zxzx74147.dksq.modules.model;
 
 import com.litesuits.orm.db.annotation.Column;
 import com.litesuits.orm.db.annotation.Default;
@@ -8,12 +8,17 @@ import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
 import com.litesuits.orm.db.enums.AssignType;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import cn.myhug.common.base.BaseModel;
+
 /**
  * Created by zhengxin on 2017/2/4.
  */
 
 @Table("actions")
-public class ActionData {
+public class ActionModel extends BaseModel{
 
     @Column("id")
     @PrimaryKey(AssignType.BY_MYSELF)
@@ -34,7 +39,7 @@ public class ActionData {
 
     public String comment;
 
-    public String image;
+    public List<String> image = new LinkedList<>();
 
     @Default("0")
     @NotNull

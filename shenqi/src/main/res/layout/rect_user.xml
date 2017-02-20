@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="com.zxzx74147.dksq.modules.data.UserData" />
+            type="com.zxzx74147.dksq.modules.model.UserModel" />
     </data>
 
     <LinearLayout

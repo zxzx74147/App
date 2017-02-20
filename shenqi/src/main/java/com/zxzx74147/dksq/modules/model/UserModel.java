@@ -1,9 +1,9 @@
-package com.zxzx74147.dksq.modules.data;
+package com.zxzx74147.dksq.modules.model;
 
 /**
  * Created by zhengxin on 2017/1/11.
  */
-public class UserData {
+public class UserModel {
 
 
     public String id;

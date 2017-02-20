@@ -11,7 +11,7 @@
 
         <variable
             name="data"
-            type="com.zxzx74147.dksq.modules.data.ActionData" />
+            type="com.zxzx74147.dksq.modules.model.ActionModel" />
 
     </data>
 
