@@ -48,8 +48,7 @@ captures/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
-.idea/
-common/libs/
+
 common/src/main/res/drawable/
 purewallpapper/libs/
 purewallpapper/src/main/java/com/zxzx74147/purewallpapper/databinding/
