@@ -25,6 +25,7 @@ public class RingWidget extends View {
     private int mFrontEndColor = 0;
     private int mBackgroundStartColor = 0;
     private int mBackgroundEndColor = 0;
+    private boolean mChanged = false;
 
     public RingWidget(Context context) {
         super(context);
@@ -52,6 +53,8 @@ public class RingWidget extends View {
     private void init() {
         mPaintFr = new Paint();
         mPaintBg = new Paint();
+        mPaintFr.setStrokeWidth(1);
+        mPaintBg.setStrokeWidth(1);
         mPaintFr.setAntiAlias(true);
         mPaintBg.setAntiAlias(true);
         mPaintFr.setStyle(Paint.Style.STROKE);
@@ -76,6 +79,7 @@ public class RingWidget extends View {
     public void setFrontColor(int startColor, int endColor) {
         mFrontStartColor = startColor;
         mFrontEndColor = endColor;
+        mChanged = true;
         postInvalidate();
     }
 
@@ -87,6 +91,7 @@ public class RingWidget extends View {
     public void setBackgroundColor(int startColor, int endColor) {
         mBackgroundStartColor = startColor;
         mBackgroundEndColor = endColor;
+        mChanged = true;
         postInvalidate();
     }
 
@@ -103,19 +108,19 @@ public class RingWidget extends View {
         int height = canvas.getHeight();
         int width = canvas.getWidth();
         mRect.set(strokeWidth / 2, strokeWidth / 2, width - strokeWidth / 2, height - strokeWidth / 2);
-        if(mFrontStartColor!=0||mFrontEndColor!=0){
-            SweepGradient gradient = new SweepGradient(width/2, height/2, mFrontStartColor, mFrontEndColor);
+        if (mChanged) {
+            mChanged = false;
+            SweepGradient gradient = new SweepGradient(width / 2, height / 2, mFrontStartColor, mFrontEndColor);
             mPaintFr.setShader(gradient);
             mFrontStartColor = 0;
-            mFrontEndColor =0;
-        }
-
-        if(mBackgroundStartColor!=0||mBackgroundEndColor!=0){
-            SweepGradient gradient = new SweepGradient(width/2, height/2, mBackgroundStartColor, mBackgroundEndColor);
+            mFrontEndColor = 0;
+            gradient = new SweepGradient(width / 2, height / 2, mBackgroundStartColor, mBackgroundEndColor);
             mPaintBg.setShader(gradient);
             mBackgroundStartColor = 0;
-            mBackgroundEndColor =0;
+            mBackgroundEndColor = 0;
         }
+
+
         canvas.drawArc(mRect, 0, 360, false, mPaintBg);
         canvas.drawArc(mRect, 0, mAngle, false, mPaintFr);
     }

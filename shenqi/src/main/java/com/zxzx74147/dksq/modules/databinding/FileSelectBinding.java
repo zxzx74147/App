@@ -25,7 +25,7 @@ public class FileSelectBinding {
                 ImageSelectHelper.selectImageSingle(((Activity) imageView.getContext()), new IFileSelectCallback() {
                     @Override
                     public void onFileSelect(List<String> files) {
-                        imageView.setTag(cn.myhug.common.R.id.tag_file);
+//                        imageView.setTag(cn.myhug.common.R.id.tag_file,files.get(0));
                         if(item!=null) {
                             item.onFileSelect(files);
                         }

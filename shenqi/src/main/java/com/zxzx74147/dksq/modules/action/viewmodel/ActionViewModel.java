@@ -5,24 +5,21 @@ import android.content.Context;
 import com.zxzx74147.devlib.http.ZXHttpCallback;
 import com.zxzx74147.devlib.http.ZXHttpResponse;
 import com.zxzx74147.devlib.utils.ZXToastUtil;
-import com.zxzx74147.dksq.BR;
+import com.zxzx74147.dksq.modules.action.ActionSubmitManager;
 import com.zxzx74147.dksq.modules.action.service.ActionDataService;
 import com.zxzx74147.dksq.modules.model.ActionModel;
-import com.zxzx74147.dksq.modules.upload.ImageUploadHelper;
 
 import java.util.List;
 
 import cn.myhug.common.base.BaseViewModel;
 import cn.myhug.common.callback.IFileSelectCallback;
-import cn.myhug.common.callback.IFileUploadCallback;
 
 /**
  * Created by zhengxin on 2017/2/17.
  */
 
-public class ActionViewModel extends BaseViewModel {
+public class ActionViewModel extends BaseViewModel<ActionModel> {
 
-    private ActionModel mModel = null;
     private ActionDataService mService = null;
 
     public ActionViewModel(Context context) {
@@ -31,12 +28,17 @@ public class ActionViewModel extends BaseViewModel {
         mService = new ActionDataService(mContext);
     }
 
+    @Override
+    public void destory() {
+        super.destory();
+    }
+
     public IFileSelectCallback getFileSelectCallback() {
         return mFileSelectCallback;
     }
 
     public String getImage(int index) {
-        if(index>=mModel.image.size()){
+        if (index >= mModel.image.size()) {
             return null;
         }
         return mModel.image.get(index);
@@ -51,22 +53,14 @@ public class ActionViewModel extends BaseViewModel {
         @Override
         public void onFileSelect(List<String> files) {
             ZXToastUtil.showToast(files.get(0));
-            mModel.image.add(files.get(0));
-            notifyPropertyChanged(BR.vm);
-
+            mModel.local_image.add(files.get(0));
+            mModel.notifyChange();
         }
     };
 
-    public void submitAction(){
-        ImageUploadHelper.uploadImage(mModel.image, new IFileUploadCallback() {
-            @Override
-            public void onFileUpload(boolean success, List<String> result) {
-
-            }
-        });
+    public void submitAction() {
+        ActionSubmitManager.sharedInstance().enqueue(mModel);
     }
-
-
 
     public void loadActionDetail(int id) {
         mService.loadActionModel(id, new ZXHttpCallback<ActionModel>() {
@@ -78,6 +72,4 @@ public class ActionViewModel extends BaseViewModel {
             }
         });
     }
-
-
 }

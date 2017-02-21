@@ -5,10 +5,13 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.zxzx74147.dksq.modules.action.viewmodel.ActionViewModel" />
 
         <variable
-            name="vm"
-            type="com.zxzx74147.dksq.modules.action.viewmodel.ActionViewModel" />
+            name="model"
+            type="com.zxzx74147.dksq.modules.model.ActionModel" />
 
     </data>
 
@@ -28,6 +31,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 tools:context=".modules.action.ActionRecordActivity">
+
+                <com.zxzx74147.dksq.modules.action.widget.TimeRing
+                    android:id="@+id/time_ring"
+                    android:layout_margin="@dimen/default_gap_150"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -54,7 +63,8 @@
                     android:id="@+id/comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:minLines="5" />
+                    android:minLines="5"
+                    android:text="@={model.comment}" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -67,8 +77,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:image_radio="1"
-                        app:img_url="@{vm.getImage(0)}"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:img_url="@{model.getImage(0)}"
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image1"
@@ -76,17 +86,17 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:image_radio="1"
-                        app:img_url="@{vm.getImage(1)}"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:img_url="@{model.getImage(1)}"
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        app:img_url="@{vm.getImage(2)}"
                         app:image_radio="1"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:img_url="@{model.getImage(2)}"
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -100,7 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:image_radio="1"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image4"
@@ -108,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:image_radio="1"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
 
                     <com.zxzx74147.devlib.image.widget.ZXImageView
                         android:id="@+id/image5"
@@ -116,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:image_radio="1"
-                        app:onImageSelect="@{vm.getFileSelectCallback()}" />
+                        app:onImageSelect="@{viewModel.getFileSelectCallback()}" />
                 </LinearLayout>
 
 
@@ -129,9 +139,9 @@
 
             <Button
                 android:id="@+id/commit"
-                android:onClick="@{()->vm.submitAction()}"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_gap_80"
+                android:onClick="@{()->viewModel.submitAction()}"
                 android:text="@string/submit" />
         </LinearLayout>
     </LinearLayout>

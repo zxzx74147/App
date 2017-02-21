@@ -56,8 +56,10 @@ public class ImageUploadHelper {
                 if (callback == null) {
                     return false;
                 }
-                if (task.getResult() == null) {
+                if (task.getResult() != null) {
                     callback.onFileUpload(true, task.getResult());
+                }else{
+                    callback.onFileUpload(false, task.getResult());
                 }
                 return null;
             }

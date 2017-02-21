@@ -4,6 +4,7 @@
     <string name="register">注册</string>
     <string name="cancel">取消</string>
     <string name="ok">确定</string>
+    <string name="digi_font">font/DS-DIGI.TTF</string>
 
 
 </resources>
