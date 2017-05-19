@@ -17,13 +17,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="0dip"
-            android:layout_weight="1">
+        <!--<ScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0dip"-->
+            <!--android:id="@+id/scroll"-->
+            <!--android:layout_weight="1">-->
 
             <LinearLayout
                 android:id="@+id/activity_record_action"
@@ -34,7 +36,10 @@
 
                 <com.zxzx74147.dksq.modules.action.widget.TimeRing
                     android:id="@+id/time_ring"
-                    android:layout_margin="@dimen/default_gap_150"
+                    android:layout_marginLeft="@dimen/default_gap_150"
+                    android:layout_marginRight="@dimen/default_gap_150"
+                    android:layout_marginTop="@dimen/default_gap_50"
+                    android:layout_marginBottom="@dimen/default_gap_50"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
@@ -131,7 +136,7 @@
 
 
             </LinearLayout>
-        </ScrollView>
+        <!--</ScrollView>-->
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -10,7 +10,7 @@ import java.util.List;
  * Created by zhengxin on 16/8/21.
  */
 
-public class CommonRecyclerViewAdapter extends BaseMultiItemQuickAdapter<BaseItemData> {
+public class CommonRecyclerViewAdapter extends BaseMultiItemQuickAdapter<BaseItemData,BaseViewHolder> {
     private CommonRecyclerViewTable mTable = null;
 
     public CommonRecyclerViewAdapter(CommonRecyclerViewTable table, List<BaseItemData> data) {

@@ -20,13 +20,12 @@ public class ActionRecordActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.view_action_record);
         mViewModel = new ActionViewModel(this);
         mData = new ActionModel();
-        mBinding = DataBindingUtil.setContentView(this, R.layout.view_action_record);
         mBinding.setViewModel(mViewModel);
         mBinding.setModel(mData);
         mViewModel.setModel(mData);
-        mData.setComment("1234");
     }
 
     @Override

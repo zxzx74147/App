@@ -14,17 +14,23 @@ import com.zxzx74147.devlib.data.BaseItemData;
 import com.zxzx74147.devlib.http.ZXHttpCallback;
 import com.zxzx74147.devlib.http.ZXHttpRequest;
 import com.zxzx74147.devlib.http.ZXHttpResponse;
+import com.zxzx74147.devlib.utils.ZXJsonUtil;
 import com.zxzx74147.devlib.utils.ZXToastUtil;
 import com.zxzx74147.devlib.widget.recyclerview.CommonRecyclerViewAdapter;
 import com.zxzx74147.dksq.R;
 import com.zxzx74147.dksq.databinding.FragmentFeedListBinding;
 import com.zxzx74147.dksq.http.Config;
+import com.zxzx74147.dksq.modules.http.FeedService;
 import com.zxzx74147.dksq.modules.model.ItemListModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.myhug.common.base.BaseFragment;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class FeedFragment extends BaseFragment {
 
@@ -68,6 +74,28 @@ public class FeedFragment extends BaseFragment {
 //        refresh();
         return mBinding.getRoot();
     }
+
+//    private void refreshRetrofit(){
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl("http://blog.armcv.com/")
+//                .build();
+//        FeedService service = retrofit.create(FeedService.class);
+//        Call<ItemListModel> call = service.listRepos("10");
+//        call.enqueue(new Callback<ItemListModel>() {
+//            @Override
+//            public void onResponse(Call<ItemListModel> call, Response<ItemListModel> response) {
+//                List<BaseItemData> add = FeedDataConverter.convertData(getContext(),response.body().list);
+//                mData.clear();
+//                mData.addAll(add);
+//                mAdapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ItemListModel> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 
     private void refresh() {
         if (mRequestRefresh != null) {

@@ -34,7 +34,7 @@ public class ZXHttpClient {
 
     static {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectionPool(new ConnectionPool(100, 30, TimeUnit.SECONDS));
+        builder.connectionPool(new ConnectionPool(5, 30, TimeUnit.SECONDS));
         builder.followRedirects(true);
         mClient = builder.build();
     }

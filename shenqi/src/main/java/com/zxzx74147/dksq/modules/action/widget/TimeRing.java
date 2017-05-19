@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.zxzx74147.devlib.utils.ZXFontUtil;
@@ -18,11 +17,12 @@ import com.zxzx74147.dksq.databinding.ViewTimeRingBinding;
  */
 
 public class TimeRing extends RelativeLayout {
+    private static final String TAG = TimeRing.class.getName();
     public static final int MODE_COUNT_DOWN = 1;
     public static final int MODE_SELECT = 2;
     private int mMode = MODE_SELECT;
     private ViewTimeRingBinding mBinding = null;
-    private final int mTimeSelected = 15*60;
+    private  int mTimeSelected = 15*60;
 
     public TimeRing(Context context) {
         this(context, null);
@@ -50,7 +50,9 @@ public class TimeRing extends RelativeLayout {
                 setOnTouchListener(null);
                 break;
             case MODE_SELECT:
-                setOnTouchListener(mTouchListener);
+                showTime(mTimeSelected);
+                ZXTextUtil.mesureMaxSize(mBinding.time, getMeasuredWidth() * 70 / 100);
+//                setOnTouchListener(mTouchListener);
                 break;
         }
     }
@@ -62,35 +64,65 @@ public class TimeRing extends RelativeLayout {
         super.onMeasure(
                 MeasureSpec.makeMeasureSpec(originalWidth, MeasureSpec.EXACTLY),
                 MeasureSpec.makeMeasureSpec(originalWidth, MeasureSpec.EXACTLY));
-        ZXTextUtil.mesureMaxSize(mBinding.time, originalWidth * 70 / 100);
+
+
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        float diff = event.getY()-y;
+        int temp = (int) (diff/60)*60;
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (MODE_COUNT_DOWN == mMode) {
+                    return false;
+                }
+                y = event.getY();
+                break;
+            case MotionEvent.ACTION_MOVE:
+                showTime(mTimeSelected+temp);
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_OUTSIDE:
+                mTimeSelected+=temp;
+                mTimeSelected = Math.max(0,mTimeSelected);
+                showTime(mTimeSelected);
+                break;
+
+        }
+        return true;
     }
 
     private float y = 0;
-    private OnTouchListener mTouchListener = new OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            switch (event.getAction()) {
-                case MotionEvent.ACTION_DOWN:
-                    if (MODE_COUNT_DOWN == mMode) {
-                        return false;
-                    }
-                    y = event.getY();
-                    break;
-                case MotionEvent.ACTION_MOVE:
-                    float diff = event.getY()-y;
-                    int temp = (int) (diff/20)*60;
-                    showTime(mTimeSelected+temp);
-                    break;
-                case MotionEvent.ACTION_UP:
-                case MotionEvent.ACTION_CANCEL:
-                case MotionEvent.ACTION_OUTSIDE:
-
-                    break;
-
-            }
-            return true;
-        }
-    };
+//    private OnTouchListener mTouchListener = new OnTouchListener() {
+//        @Override
+//        public boolean onTouch(View v, MotionEvent event) {
+//            switch (event.getAction()) {
+//                case MotionEvent.ACTION_DOWN:
+//                    if (MODE_COUNT_DOWN == mMode) {
+//                        return false;
+//                    }
+//                    y = event.getY();
+//                    break;
+//                case MotionEvent.ACTION_MOVE:
+//                    float diff = event.getY()-y;
+//                    int temp = (int) (diff/20)*60;
+//                    showTime(mTimeSelected+temp);
+//                    BdLog.i(TAG,"onTouch1",temp+"");
+//                    break;
+//                case MotionEvent.ACTION_UP:
+//                case MotionEvent.ACTION_CANCEL:
+//                case MotionEvent.ACTION_OUTSIDE:
+//                    BdLog.i(TAG,"onTouch2","");
+//                    break;
+//
+//            }
+//            return true;
+//        }
+//    };
 
     public void showTime(int time){
         time=Math.max(0,time);
